@@ -1,0 +1,58 @@
+<html>
+<head>
+</head>
+<body>
+	<button id="button">button</button>
+	<div id = "temp"></div> 
+	<div id = "pos"></div> 
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script>
+
+	navigator.geolocation.getCurrentPosition(function(position) {
+	var latitude = position.coords.latitude ;
+	var longitude = position.coords.longitude;
+	console.log(latitude);
+	console.log(longitude);
+	
+	
+	
+	/*var location = "https://fcc-weather-api.glitch.me/api/current?lat=" + latitude + "&lon=" + longitude;*/
+	
+	var location = "https://fcc-weather-api.glitch.me/api/current?lat=47.751076&lon=-120.740135";
+	
+			$.getJSON(location, function(json) {
+						console.log(json);
+			var temperatura = json.main.temp;
+			var kalvin = (1.8 * temperatura + 32).toFixed(1);
+			$('#temp').html("Obecna temperatura w Twoim mieście w farenhejtach to" + kalvin);
+			});
+			
+
+	
+
+	
+	
+	
+  });
+	
+
+ 
+
+
+
+	
+
+ 
+
+ 
+ 
+
+ 
+
+
+
+
+</script> 
+</body>
+</html>
