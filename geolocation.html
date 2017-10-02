@@ -1,57 +1,156 @@
 <html>
 <head>
 </head>
+<style>
+body {
+	background-color:#17B890;
+	font-family: 'Permanent Marker', cursive;
+	font-weight:900;
+	color:#fff;
+}
+
+#weather-app{
+	display:flex;
+	flex-direction:column;
+	align-self:center;
+	}
+	
+h1, #place, #temperature, #wind,  #sky, #icon, #btn, #signature {
+	align-self:center;
+	padding: 20px;
+	font-size:26px;
+	line-height:30px;
+}
+
+#btn {
+	width:200px;
+	height:40px;
+	font-size: 16px;
+	line-height:30px;
+	text-transform:uppercase;
+	border-radius: 3px;
+	margin: 20px auto;
+	padding:5px;
+}
+
+#signature {
+	font-size: 12px;
+	line-height:12px;
+}
+
+</style>
 <body>
-	<button id="button">button</button>
-	<div id = "temp"></div> 
-	<div id = "pos"></div> 
+	<div id="weather-app">
+		<h1>Weather App</h1>
+		<div id = "place">place</div>
+
+		<div id = "temperature">temperature</div>
+		<div id = "wind">wind</div>
+		<div id = "sky">sky</div>
+		<img src = "" id = "icon" alt="weather icon">
+		<button id = "btn"> convert units </button>
+		<div id = "signature">by bareja</div>
+	</div>
+
 	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <script>
+ $(document).ready(function(){
 
-	navigator.geolocation.getCurrentPosition(function(position) {
-	var latitude = position.coords.latitude ;
-	var longitude = position.coords.longitude;
-	console.log(latitude);
-	console.log(longitude);
+	navigator.geolocation.getCurrentPosition(function(position){
+		var latitude = position.coords.latitude ;
+		var longitude = position.coords.longitude;
+			
+	var location = "https://fcc-weather-api.glitch.me/api/current?lat=" + latitude + "&lon=" + longitude;
 	
+		$.getJSON(location, function(json) {
+			console.log(json);
+			$('#place').html(json.name + ", " + json.sys.country);
+			$('#sky').html(json.weather[0].description);			
+			$('#icon').attr('src', json.weather[0].icon);
+			
+/*degrees--*/
+			var tempValue = json.main.temp;
+			var tempUnit = " &#8451";
+			$('#temperature').html(tempValue + tempUnit);
+			
 	
-	
-	/*var location = "https://fcc-weather-api.glitch.me/api/current?lat=" + latitude + "&lon=" + longitude;*/
-	
-	var location = "https://fcc-weather-api.glitch.me/api/current?lat=47.751076&lon=-120.740135";
-	
-			$.getJSON(location, function(json) {
-						console.log(json);
-			var temperatura = json.main.temp;
-			var kalvin = (1.8 * temperatura + 32).toFixed(1);
-			$('#temp').html("Obecna temperatura w Twoim mieście w farenhejtach to" + kalvin);
+/*wind----*/			
+			var windValue = json.wind.speed;
+			var windUnit = " km/h";
+			$('#wind').html(windValue + windUnit);
+			
+			$('#btn').click(function(){
+			if(windUnit === " km/h" & tempUnit === " &#8451" ){
+				windUnit = " mph";
+				windValue = (windValue / 1.61).toFixed(1);
+				
+				tempUnit = " &#8457";
+				tempValue = ((tempValue * 1.8) + 32).toFixed(1);
+			} else {
+				windUnit = " km/h";
+				windValue = (windValue * 1.61).toFixed(1);
+				
+				tempUnit = " &#8451";
+				tempValue = ((tempValue - 32) / 1.8).toFixed(1);
+			};
+			
+			$('#wind').html(windValue + windUnit);
+			$('#temperature').html(tempValue + tempUnit);
 			});
 			
 
-	
+	var weather = json.weather[0].description;
 
-	
-	
-	
-  });
-	
+		function changeBG(weather){
+		/*
+		weather = "mist";
+		*/
+			if(weather === "clear sky"){
+			$('body').css('backgroundImage','url(clear-sky.jpeg)');
+			}
+			else if (weather === "few clouds"){
+			$('body').css('backgroundImage','url(few-clouds.jpeg)');
+			}
+			else if (weather === "scatteered clouds"){
+			$('body').css('backgroundImage','url(scattered-clouds.jpeg)');
+			}
+			else if (weather === "broken clouds"){
+			$('body').css('backgroundImage','url(broken-clouds.jpeg)');
+			}
+			else if (weather === "shower rain"){
+			$('body').css('backgroundImage','url(shower-rain.jpeg)');
+			}
+			else if (weather === "rain"){
+			$('body').css('backgroundImage','url(rain.jpeg)');
+			}
+			else if (weather === "thunderstorm"){
+			$('body').css('backgroundImage','url(thunderstorm.jpeg)');
+			}
+			else if (weather === "snow"){
+			$('body').css('backgroundImage','url(snow.jpeg)');
+			}
+			else if (weather === "mist"){
+			$('body').css('backgroundImage','url(mist.jpeg)');
+			}
+		
+		};
+		
+		changeBG(weather);
+			
+			
 
+		});
+		
+	},
+	function(error){
+	alert("You need to enable tracking otherwise I am not able to show you a weather forecast");
+	});
  
-
-
-
-	
-
- 
-
- 
- 
-
- 
-
-
-
+ });
+/*
+clear sky, few clouds, scatteered clouds, broken clouds, shower rain, rain, thunderstorm, snow, mist
+*/
 
 </script> 
 </body>
