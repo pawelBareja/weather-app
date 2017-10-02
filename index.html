@@ -1,5 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="pl">
 <head>
+	<meta charset="UTF-8">
+	<title>weather-app</title>
 </head>
 <style>
 body {
@@ -73,8 +76,7 @@ h1, #place, #temperature, #wind,  #sky, #icon, #btn, #signature {
 			var tempValue = json.main.temp;
 			var tempUnit = " &#8451";
 			$('#temperature').html(tempValue + tempUnit);
-			
-	
+				
 /*wind----*/			
 			var windValue = json.wind.speed;
 			var windUnit = " km/h";
@@ -97,8 +99,7 @@ h1, #place, #temperature, #wind,  #sky, #icon, #btn, #signature {
 			
 			$('#wind').html(windValue + windUnit);
 			$('#temperature').html(tempValue + tempUnit);
-			});
-			
+			});		
 
 	var weather = json.weather[0].description;
 
@@ -133,12 +134,9 @@ h1, #place, #temperature, #wind,  #sky, #icon, #btn, #signature {
 			else if (weather === "mist"){
 			$('body').css('backgroundImage','url(mist.jpeg)');
 			}
-		
 		};
 		
 		changeBG(weather);
-			
-			
 
 		});
 		
