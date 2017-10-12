@@ -13,6 +13,8 @@ body {
 }
 
 #weather-app{
+	max-width:1200px;
+	margin: 0 auto;
 	display:flex;
 	flex-direction:column;
 	align-self:center;
@@ -108,31 +110,31 @@ h1, #place, #temperature, #wind,  #sky, #icon, #btn, #signature {
 		weather = "mist";
 		*/
 			if(weather === "clear sky"){
-			$('body').css('backgroundImage','url(clear-sky.jpeg)');
+			$('#weather-app').css('backgroundImage','url(clear-sky.jpeg)');
 			}
 			else if (weather === "few clouds"){
-			$('body').css('backgroundImage','url(few-clouds.jpeg)');
+			$('#weather-app').css('backgroundImage','url(few-clouds.jpeg)');
 			}
 			else if (weather === "scatteered clouds"){
-			$('body').css('backgroundImage','url(scattered-clouds.jpeg)');
+			$('#weather-app').css('backgroundImage','url(scattered-clouds.jpeg)');
 			}
 			else if (weather === "broken clouds"){
-			$('body').css('backgroundImage','url(broken-clouds.jpeg)');
+			$('#weather-app').css('backgroundImage','url(broken-clouds.jpeg)');
 			}
 			else if (weather === "shower rain"){
-			$('body').css('backgroundImage','url(shower-rain.jpeg)');
+			$('#weather-app').css('backgroundImage','url(shower-rain.jpeg)');
 			}
 			else if (weather === "rain"){
-			$('body').css('backgroundImage','url(rain.jpeg)');
+			$('#weather-app').css('backgroundImage','url(rain.jpeg)');
 			}
 			else if (weather === "thunderstorm"){
-			$('body').css('backgroundImage','url(thunderstorm.jpeg)');
+			$('#weather-app').css('backgroundImage','url(thunderstorm.jpeg)');
 			}
 			else if (weather === "snow"){
-			$('body').css('backgroundImage','url(snow.jpeg)');
+			$('#weather-app').css('backgroundImage','url(snow.jpeg)');
 			}
 			else if (weather === "mist"){
-			$('body').css('backgroundImage','url(mist.jpeg)');
+			$('#weather-app').css('backgroundImage','url(mist.jpeg)');
 			}
 		};
 		
